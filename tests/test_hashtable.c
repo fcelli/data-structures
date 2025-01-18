@@ -1,5 +1,6 @@
 #include "hashtable.h"
 #include <assert.h>
+#include <stdio.h>
 
 uint64_t simple_hash(const char* key) {
     uint64_t hash = 0;
