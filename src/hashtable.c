@@ -1,36 +1,36 @@
 #include "hashtable.h"
 
-typedef struct entry {
+typedef struct entry_t {
     char* key;
     void* object;
-    struct entry* next;
-} entry;
+    struct entry_t* next;
+} entry_t;
 
 typedef struct _hash_table {
     size_t size;
     hash_function* hash;
-    entry** elements;
-} hash_table;
+    entry_t** elements;
+} hash_table_t;
 
-static size_t hash_table_index(hash_table* ht, const char* key) {
+static size_t hash_table_index(hash_table_t* ht, const char* key) {
     size_t index = ht->hash(key) % ht->size;
     return index;
 }
 
-hash_table* hash_table_create(size_t size, hash_function* hf) {
-    hash_table* ht = malloc(sizeof(*ht));
+hash_table_t* hash_table_create(size_t size, hash_function* hf) {
+    hash_table_t* ht = malloc(sizeof(*ht));
     ht->size = size;
     ht->hash = hf;
-    ht->elements = calloc(sizeof(entry*), size);
+    ht->elements = calloc(sizeof(entry_t*), size);
     return ht;
 }
 
-void hash_table_destroy(hash_table* ht) {
+void hash_table_destroy(hash_table_t* ht) {
     free(ht->elements);
     free(ht);
 }
 
-bool hash_table_insert(hash_table* ht, const char* key, void* obj) {
+bool hash_table_insert(hash_table_t* ht, const char* key, void* obj) {
     if (key == NULL || obj == NULL) {
         return false;
     }
@@ -43,7 +43,7 @@ bool hash_table_insert(hash_table* ht, const char* key, void* obj) {
     size_t index = hash_table_index(ht, key);
 
     // Create a new entry
-    entry* e = malloc(sizeof(*e));
+    entry_t* e = malloc(sizeof(*e));
     e->key = malloc(strlen(key) + 1);
     strcpy(e->key, key);
     e->object = obj;
@@ -55,13 +55,13 @@ bool hash_table_insert(hash_table* ht, const char* key, void* obj) {
     return true;
 }
 
-void* hash_table_lookup(hash_table* ht, const char* key) {
+void* hash_table_lookup(hash_table_t* ht, const char* key) {
     if (ht == NULL || key == NULL) {
         return NULL;
     }
 
     size_t index = hash_table_index(ht, key);
-    entry* e = ht->elements[index];
+    entry_t* e = ht->elements[index];
 
     while (e != NULL && strcmp(e->key, key) != 0) {
         e = e->next;
@@ -74,14 +74,14 @@ void* hash_table_lookup(hash_table* ht, const char* key) {
     return e->object;
 }
 
-void* hash_table_delete(hash_table* ht, const char* key) {
+void* hash_table_delete(hash_table_t* ht, const char* key) {
     if (ht == NULL || key == NULL) {
         return NULL;
     }
 
     size_t index = hash_table_index(ht, key);
-    entry* e = ht->elements[index];
-    entry* prev = NULL;
+    entry_t* e = ht->elements[index];
+    entry_t* prev = NULL;
 
     // Search the entry to be deleted
     while (e != NULL && strcmp(e->key, key) != 0) {

@@ -14,14 +14,14 @@ void print_test_passed(const char* test_name) {
 }
 
 void test_hash_table_create_destroy() {
-    hash_table* ht = hash_table_create(10, simple_hash);
+    hash_table_t* ht = hash_table_create(10, simple_hash);
     assert(ht != NULL);
     hash_table_destroy(ht);
     print_test_passed(__func__);
 }
 
 void test_hash_table_insert_lookup() {
-    hash_table* ht = hash_table_create(10, simple_hash);
+    hash_table_t* ht = hash_table_create(10, simple_hash);
     assert(hash_table_insert(ht, "key1", (void*)1) == true);
     assert(hash_table_insert(ht, "key2", "value") == true);
     void* value = hash_table_lookup(ht, "key1");
@@ -33,7 +33,7 @@ void test_hash_table_insert_lookup() {
 }
 
 void test_hash_table_delete() {
-    hash_table* ht = hash_table_create(10, simple_hash);
+    hash_table_t* ht = hash_table_create(10, simple_hash);
     hash_table_insert(ht, "key", (void*)1);
     assert(hash_table_delete(ht, "key") == (void*)1);
     assert(hash_table_lookup(ht, "key") == NULL);
