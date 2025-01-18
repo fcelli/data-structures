@@ -32,7 +32,7 @@ $(TESTS_BUILD_DIR)/%.o: $(TESTS_DIR)/%.c
 	@mkdir -p $(TESTS_BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-tests: $(TARGET) $(TEST_BINS)
+check: $(TARGET) $(TEST_BINS)
 	@for test in $(TEST_BINS); do \
 		$$test; \
 	done
@@ -43,4 +43,4 @@ $(TESTS_BUILD_DIR)/%: $(TESTS_BUILD_DIR)/%.o $(TARGET)
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all tests clean
+.PHONY: all check clean
