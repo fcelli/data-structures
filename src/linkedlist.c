@@ -19,7 +19,20 @@ linked_list_t* linked_list_create() {
     return ll;
 }
 
-void linked_list_destroy(linked_list_t* ll) { free(ll); }
+void linked_list_destroy(linked_list_t* ll, void (*free_func)(void*)) {
+    if (ll == NULL) {
+        return;
+    }
+    node_t* current = ll->head;
+    while (current != NULL) {
+        if (free_func != NULL && current->object != NULL) {
+            free_func(current->object);
+        }
+        current = current->next;
+        free(current);
+    }
+    free(ll);
+}
 
 size_t linked_list_size(linked_list_t* ll) {
     if (ll == NULL) {
@@ -130,7 +143,7 @@ void* linked_list_pop_back(linked_list_t* ll) {
         return obj;
     }
 
-    // Iterate through linked list to find penultimate
+    // Iterate through linked list to find penultimate node
     node_t* tmp = ll->head;
     while (tmp != NULL && tmp->next != node) {
         tmp = tmp->next;

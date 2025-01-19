@@ -7,7 +7,7 @@
 typedef struct _linked_list linked_list_t;
 
 linked_list_t* linked_list_create();
-void linked_list_destroy(linked_list_t* ll);
+void linked_list_destroy(linked_list_t* ll, void (*free_func)(void*));
 size_t linked_list_size(linked_list_t* ll);
 bool linked_list_push_front(linked_list_t* ll, void* obj);
 bool linked_list_push_back(linked_list_t* ll, void* obj);

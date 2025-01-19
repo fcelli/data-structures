@@ -13,7 +13,7 @@ void test_linked_list_create_destroy() {
     assert(ll != NULL);
     assert(linked_list_size(ll) == 0);
     // Destroy linked list
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     // Report
     print_test_passed(__func__);
 }
@@ -28,7 +28,7 @@ void test_linked_list_push_front() {
     assert(linked_list_push_front(ll, NULL) == false);
     assert(linked_list_size(ll) == 1);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -42,7 +42,7 @@ void test_linked_list_push_back() {
     assert(linked_list_push_back(ll, NULL) == false);
     assert(linked_list_size(ll) == 1);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -64,7 +64,7 @@ void test_linked_list_peek_front() {
     assert(strcmp(head_obj, "value") == 0);
     assert(linked_list_size(ll) == 2);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -86,7 +86,7 @@ void test_linked_list_peek_back() {
     assert(strcmp(tail_obj, "value") == 0);
     assert(linked_list_size(ll) == 2);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -109,7 +109,7 @@ void test_linked_list_pop_front() {
     assert(head_obj == NULL);
     assert(linked_list_size(ll) == 0);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -132,7 +132,7 @@ void test_linked_list_pop_back() {
     assert(tail_obj == NULL);
     assert(linked_list_size(ll) == 0);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -153,7 +153,7 @@ void test_linked_list_lookup() {
     obj = linked_list_lookup(ll, 3);
     assert(obj == NULL);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -176,7 +176,7 @@ void test_linked_list_insert() {
     assert(linked_list_insert(ll, 10, (int*)10) == false);
     assert(linked_list_size(ll) == 3);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
@@ -201,7 +201,7 @@ void test_linked_list_delete() {
     assert(linked_list_delete(ll, 1) == (int*)4);
     assert(linked_list_size(ll) == 1);
     // Destroy linked list and report
-    linked_list_destroy(ll);
+    linked_list_destroy(ll, NULL);
     print_test_passed(__func__);
 }
 
