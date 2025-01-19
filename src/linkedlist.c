@@ -28,8 +28,9 @@ void linked_list_destroy(linked_list_t* ll, void (*free_func)(void*)) {
         if (free_func != NULL && current->object != NULL) {
             free_func(current->object);
         }
-        current = current->next;
+        node_t* next = current->next;
         free(current);
+        current = next;
     }
     free(ll);
 }
